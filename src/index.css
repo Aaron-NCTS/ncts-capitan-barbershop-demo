@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Cormorant", "Georgia", serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #0e0d0c;
+  --color-ink-soft: #17140f;
+  --color-carbon: #1e1a15;
+  --color-carbon-line: #2f2a22;
+  --color-gold: #c9a227;
+  --color-gold-soft: #e4c968;
+  --color-cream: #ede6d6;
+  --color-cream-dim: #b7ae9b;
+  --color-paper: #f6f2e8;
+  --color-ok: #4f7a5c;
+  --color-warn: #b5822a;
+  --color-danger: #a34a3f;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-ink);
+}
+
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* thin gold hairline used as a signature structural device */
+.hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+/* scrollbar tuning for admin tables/panels */
+.thin-scroll::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+.thin-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-carbon-line);
+  border-radius: 999px;
+}
