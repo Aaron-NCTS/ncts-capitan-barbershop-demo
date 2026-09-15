@@ -2,7 +2,7 @@ import { brand } from '../../brand/config'
 
 export function Hero() {
   return (
-    <section id="inicio" className="relative overflow-hidden bg-ink pt-32 pb-20 sm:pt-40 sm:pb-28">
+    <section id="inicio" className="relative overflow-hidden bg-ink pb-20 sm:pb-28">
       {/* Textura de fondo: retícula sutil, sin gradientes llamativos */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.05]"

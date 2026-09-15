@@ -1,5 +1,11 @@
 import { Route, Routes } from 'react-router-dom'
-import PublicSite from './pages/PublicSite'
+import { PublicLayout } from './components/public/PublicLayout'
+import Home from './pages/Home'
+import Servicios from './pages/Servicios'
+import Barberos from './pages/Barberos'
+import Nosotros from './pages/Nosotros'
+import Ubicacion from './pages/Ubicacion'
+import Reservar from './pages/Reservar'
 import AdminLayout from './pages/admin/AdminLayout'
 import Dashboard from './pages/admin/Dashboard'
 import Agenda from './pages/admin/Agenda'
@@ -17,7 +23,14 @@ export default function App() {
   return (
     <ToastProvider>
       <Routes>
-        <Route path="/" element={<PublicSite />} />
+        <Route path="/" element={<PublicLayout />}>
+          <Route index element={<Home />} />
+          <Route path="servicios" element={<Servicios />} />
+          <Route path="barberos" element={<Barberos />} />
+          <Route path="nosotros" element={<Nosotros />} />
+          <Route path="ubicacion" element={<Ubicacion />} />
+          <Route path="reservar" element={<Reservar />} />
+        </Route>
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Dashboard />} />
           <Route path="agenda" element={<Agenda />} />

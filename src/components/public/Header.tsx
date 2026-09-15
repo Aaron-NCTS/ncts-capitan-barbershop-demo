@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { brand } from '../../brand/config'
+import { SocialLinks } from './SocialLinks'
 
 const ENLACES = [
-  { href: '#servicios', label: 'Servicios' },
-  { href: '#barberos', label: 'Barberos' },
-  { href: '#nosotros', label: 'Nosotros' },
-  { href: '#ubicacion', label: 'Ubicación' },
-  { href: '#contacto', label: 'Contacto' },
+  { to: '/servicios', label: 'Servicios' },
+  { to: '/barberos', label: 'Barberos' },
+  { to: '/nosotros', label: 'Nosotros' },
+  { to: '/ubicacion', label: 'Ubicación' },
 ]
 
 export function Header() {
   const [conScroll, setConScroll] = useState(false)
   const [menuAbierto, setMenuAbierto] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const onScroll = () => setConScroll(window.scrollY > 12)
@@ -30,7 +32,7 @@ export function Header() {
 
   const irAReservar = () => {
     setMenuAbierto(false)
-    document.getElementById('reservar')?.scrollIntoView({ behavior: 'smooth' })
+    navigate('/reservar')
   }
 
   return (
@@ -39,20 +41,30 @@ export function Header() {
         conScroll ? 'bg-ink/90 backdrop-blur border-b border-carbon-line' : 'bg-transparent'
       }`}
     >
+      {/* Franja superior: siempre visible, refuerza presencia de marca */}
+      <div className="hidden border-b border-carbon-line/60 bg-ink/60 py-1.5 md:block">
+        <div className="mx-auto flex max-w-6xl items-center justify-end gap-5 px-5 sm:px-8">
+          <span className="text-xs text-cream-dim/70">{brand.contacto.telefono}</span>
+          <SocialLinks tamano={14} />
+        </div>
+      </div>
+
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
-        <a href="#inicio" className="font-display text-xl tracking-wide text-paper sm:text-2xl">
+        <Link to="/" className="font-display text-xl tracking-wide text-paper sm:text-2xl">
           {brand.nombre}
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
           {ENLACES.map((e) => (
-            <a
-              key={e.href}
-              href={e.href}
-              className="text-sm text-cream-dim transition-colors hover:text-gold"
+            <NavLink
+              key={e.to}
+              to={e.to}
+              className={({ isActive }) =>
+                `text-sm transition-colors hover:text-gold ${isActive ? 'text-gold' : 'text-cream-dim'}`
+              }
             >
               {e.label}
-            </a>
+            </NavLink>
           ))}
         </nav>
 
@@ -84,14 +96,14 @@ export function Header() {
           </div>
           <nav className="mt-8 flex flex-col items-center gap-7 px-5">
             {ENLACES.map((e) => (
-              <a
-                key={e.href}
-                href={e.href}
+              <NavLink
+                key={e.to}
+                to={e.to}
                 onClick={() => setMenuAbierto(false)}
                 className="font-display text-2xl text-paper"
               >
                 {e.label}
-              </a>
+              </NavLink>
             ))}
             <button
               onClick={irAReservar}
@@ -99,6 +111,7 @@ export function Header() {
             >
               Reservar cita
             </button>
+            <SocialLinks className="mt-2" tamano={20} />
           </nav>
         </div>
       )}
